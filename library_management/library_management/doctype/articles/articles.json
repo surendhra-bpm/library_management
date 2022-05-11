@@ -8,12 +8,14 @@
  "engine": "InnoDB",
  "field_order": [
   "article_name",
-  "image",
   "author",
-  "description",
   "isbn",
+  "column_break_4",
   "status",
-  "publisher"
+  "image",
+  "publisher",
+  "section_break_8",
+  "description"
  ],
  "fields": [
   {
@@ -27,6 +29,7 @@
   {
    "fieldname": "image",
    "fieldtype": "Attach Image",
+   "hidden": 1,
    "label": "Image"
   },
   {
@@ -54,11 +57,20 @@
    "fieldname": "publisher",
    "fieldtype": "Data",
    "label": "Publisher"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_8",
+   "fieldtype": "Section Break"
   }
  ],
+ "image_field": "image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-05-11 12:39:49.099973",
+ "modified": "2022-05-11 14:04:14.098029",
  "modified_by": "Administrator",
  "module": "Library Management",
  "name": "Articles",
@@ -75,6 +87,27 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Librarian",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Library Member",
+   "share": 1
   }
  ],
  "quick_entry": 1,
