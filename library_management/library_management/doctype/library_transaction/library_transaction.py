@@ -20,17 +20,27 @@ class LibraryTransaction(Document):
 			articles = frappe.get_doc("Articles", self.artilces)
 			articles.status = "Available"
 			articles.save()
+
 	def validate_issue(self):
 		self.validate_membership()
 		articles = frappe.get_doc("Articles", self.articles)
 		# Articles cannot be issued it it is already Issued
 		if articles.status == "Issued":
 			frappe.throw("Article is already issued by another member")
+	
 	def validate_return(self):
 		articles = frappe.get_doc("Articles", self.articles)
 		# Articles cannot be retunedif it is not issued first
 		if articles.status == "Available":
 			frappe.throw("Article cannot be returned without being issued first")
+	
+	def validate_maximum_limit(self):
+		max_articles = frappe.db.get_single_value("Library Settings", "max_articles")
+		count = frappe.db.count(
+			"Library Transaction",
+			{"library_member": self.library_member, "type": "Issue", "docstatus": DocStatus.submitted()},
+		)
+
 	def validate_membership(self):
 		# Check if a valid membership exist for this library member
 		valid_membership == frappe.db.exists(

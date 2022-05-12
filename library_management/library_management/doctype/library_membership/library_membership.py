@@ -19,4 +19,8 @@ class LibraryMembership(Document):
 		)
 		if exists:
 			frappe.throw("There is an active membership for this member")
-			
+
+		# get Loan Peroid and comput e to_date by adding loan_period to from_date
+		loan_period = frappe.db.get_single_value("Library Settings", "loan_peroid")
+		self.to_date = frappe.utils.add_days(self.from_date, loan_period or 30)	
+		
